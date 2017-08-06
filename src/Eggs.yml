@@ -1,0 +1,6 @@
+Reward-Commands-For-Last-Egg:
+- "coins add %player% 1000"
+- "pex user %player% add CatsCraftMain.EasterBunny"
+
+Reward-Commands-For-Not-Last-Egg:
+- "coins add %player% 75"
