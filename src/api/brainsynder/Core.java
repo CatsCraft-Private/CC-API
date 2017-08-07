@@ -12,6 +12,7 @@ package api.brainsynder;
 
 import EasterEgg.hunt.MainEggHunt;
 import api.brainsynder.Listeners.ChatListener;
+import api.brainsynder.Listeners.EntityDamageListener;
 import api.brainsynder.Utils.Configuration;
 import api.brainsynder.Utils.FloatingItem;
 import api.brainsynder.commands.CommandCore;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class Core extends JavaPlugin {
     private static Core instance;
@@ -35,8 +37,13 @@ public class Core extends JavaPlugin {
     private Configuration configuration;
     private boolean blockDabAttack = false;
     private boolean blockCommands = false;
+    private List<UUID> noFall = new ArrayList<>();
 
-    public static Core get() {
+    public List<UUID> getNoFall() {
+		return noFall;
+	}
+
+	public static Core get() {
         return instance;
     }
 
@@ -51,6 +58,7 @@ public class Core extends JavaPlugin {
             configuration.set("DatabaseUpdate-Interval", 300);
         }
         getServer().getPluginManager().registerEvents(new ChatListener(), this);
+        getServer().getPluginManager().registerEvents(new EntityDamageListener(), this);
 
         DateFormat dateFormat = new SimpleDateFormat("MM");
         Date date = new Date();
@@ -106,6 +114,7 @@ public class Core extends JavaPlugin {
             }
             OnlineTime.DatabaseUpload.forceUpdate();
         }
+        noFall.clear();
     }
 
     public Configuration getConfiguration() {
