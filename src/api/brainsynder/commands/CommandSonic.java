@@ -1,6 +1,7 @@
 package api.brainsynder.commands;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -8,7 +9,6 @@ import org.bukkit.potion.PotionEffectType;
 import api.brainsynder.Core;
 import api.brainsynder.Utils.Cooldown;
 import api.brainsynder.commands.api.Command;
-import net.md_5.bungee.api.ChatColor;
 
 public class CommandSonic extends CommandCore {
 	
