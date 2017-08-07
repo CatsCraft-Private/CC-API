@@ -37,6 +37,9 @@ public abstract class CommandCore implements CommandListener {
     );
     
     public static void registerCommands () {
+    	CommandManager.register(new CommandStealCats());
+    	CommandManager.register(new CommandFurBall());
+    	CommandManager.register(new CommandCookieDough());
         CommandManager.register(new CommandBow());
         CommandManager.register(new CommandComfort());
         CommandManager.register(new CommandCry());
