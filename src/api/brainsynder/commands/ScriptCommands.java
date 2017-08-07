@@ -150,13 +150,8 @@ public class ScriptCommands extends CommandCore {
 
 
     @Command(name = "gg")
-    public void gg(Player player, String[] args) {
+    public void gg(Player player) {
         if (!Cooldown.hasCooldown(player, 10, "§5[§d§lTP§5]§5 You have to wait {secondsLeft} before you can use this command again!")) {
-            Player target = Bukkit.getPlayerExact(args[0]);
-            if (target == null) {
-                player.sendMessage(prefix + args[0] + " is not online or not correct.");
-                return;
-            }
             Cooldown.giveCooldown(player);
 
             Bukkit.getOnlinePlayers().forEach(all ->
@@ -166,13 +161,8 @@ public class ScriptCommands extends CommandCore {
     }
 
     @Command(name = "dab")
-    public void dab(Player player, String[] args) {
+    public void dab(Player player) {
         if (!Cooldown.hasCooldown(player, 10, "§5[§d§lTP§5]§5 You have to wait {secondsLeft} before you can use this command again!")) {
-            Player target = Bukkit.getPlayerExact(args[0]);
-            if (target == null) {
-                player.sendMessage(prefix + args[0] + " is not online or not correct.");
-                return;
-            }
             Cooldown.giveCooldown(player);
 
             Bukkit.getOnlinePlayers().forEach(all ->
@@ -182,13 +172,8 @@ public class ScriptCommands extends CommandCore {
     }
 
     @Command(name = "hugspree")
-    public void hugspree(Player player, String[] args) {
+    public void hugspree(Player player) {
         if (!Cooldown.hasCooldown(player, 10, "§5[§d§lTP§5]§5 You have to wait {secondsLeft} before you can use this command again!")) {
-            Player target = Bukkit.getPlayerExact(args[0]);
-            if (target == null) {
-                player.sendMessage(prefix + args[0] + " is not online or not correct.");
-                return;
-            }
             Cooldown.giveCooldown(player);
 
             Bukkit.getOnlinePlayers().forEach(all ->
@@ -198,15 +183,9 @@ public class ScriptCommands extends CommandCore {
     }
 
     @Command(name = "dabdash")
-    public void dabdash(Player player, String[] args) {
+    public void dabdash(Player player) {
         if (!Cooldown.hasCooldown(player, 10, "§5[§d§lTP§5]§5 You have to wait {secondsLeft} before you can use this command again!")) {
-            Player target = Bukkit.getPlayerExact(args[0]);
-            if (target == null) {
-                player.sendMessage(prefix + args[0] + " is not online or not correct.");
-                return;
-            }
             Cooldown.giveCooldown(player);
-
             Bukkit.getOnlinePlayers().forEach(all ->
                     all.sendMessage("§5[§d§lTP§5]§5 " + player.getName() + " §7is dab dashing! §e-§6=§4=\\o>")
             );
@@ -237,13 +216,8 @@ public class ScriptCommands extends CommandCore {
     }
 
     @Command(name = "goteem")
-    public void goteem(Player player, String[] args) {
+    public void goteem(Player player) {
         if (!Cooldown.hasCooldown(player, 10, "§6[§e§lMP§6]§6 You have to wait {secondsLeft} before you can use this command again!")) {
-            Player target = Bukkit.getPlayerExact(args[0]);
-            if (target == null) {
-                player.sendMessage(prefix + args[0] + " is not online or not correct.");
-                return;
-            }
             Cooldown.giveCooldown(player);
 
             Bukkit.getOnlinePlayers().forEach(all ->
@@ -253,13 +227,8 @@ public class ScriptCommands extends CommandCore {
     }
 
     @Command(name = "giggle")
-    public void giggle(Player player, String[] args) {
+    public void giggle(Player player) {
         if (!Cooldown.hasCooldown(player, 10, "§6[§e§lMP§6]§6 You have to wait {secondsLeft} before you can use this command again!")) {
-            Player target = Bukkit.getPlayerExact(args[0]);
-            if (target == null) {
-                player.sendMessage(prefix + args[0] + " is not online or not correct.");
-                return;
-            }
             Cooldown.giveCooldown(player);
 
             Bukkit.getOnlinePlayers().forEach(all ->
@@ -271,13 +240,8 @@ public class ScriptCommands extends CommandCore {
 
     // BP
     @Command(name = "roar")
-    public void roar(Player player, String[] args) {
+    public void roar(Player player) {
         if (!Cooldown.hasCooldown(player, 10, "§0[§4BP§0] §cYou have to wait {secondsLeft} before you can use this command again!")) {
-            Player target = Bukkit.getPlayerExact(args[0]);
-            if (target == null) {
-                player.sendMessage(prefix + args[0] + " is not online or not correct.");
-                return;
-            }
             Cooldown.giveCooldown(player);
 
             Bukkit.getOnlinePlayers().forEach(all ->
@@ -289,13 +253,8 @@ public class ScriptCommands extends CommandCore {
 
     // AP
     @Command(name = "blowkiss")
-    public void blowkiss(Player player, String[] args) {
+    public void blowkiss(Player player) {
         if (!Cooldown.hasCooldown(player, 10, "§4[§c§lAP§4] §4You have to wait {secondsLeft} before you can use this command again!")) {
-            Player target = Bukkit.getPlayerExact(args[0]);
-            if (target == null) {
-                player.sendMessage(prefix + args[0] + " is not online or not correct.");
-                return;
-            }
             Cooldown.giveCooldown(player);
 
             Bukkit.getOnlinePlayers().forEach(all ->
@@ -305,13 +264,8 @@ public class ScriptCommands extends CommandCore {
     }
 
     @Command(name = "popcorn")
-    public void popcorn(Player player, String[] args) {
+    public void popcorn(Player player) {
         if (!Cooldown.hasCooldown(player, 10, "§4[§c§lAP§4] §4You have to wait {secondsLeft} before you can use this command again!")) {
-            Player target = Bukkit.getPlayerExact(args[0]);
-            if (target == null) {
-                player.sendMessage(prefix + args[0] + " is not online or not correct.");
-                return;
-            }
             Cooldown.giveCooldown(player);
 
             Bukkit.getOnlinePlayers().forEach(all ->
@@ -321,13 +275,8 @@ public class ScriptCommands extends CommandCore {
     }
 
     @Command(name = "burp")
-    public void burp(Player player, String[] args) {
+    public void burp(Player player) {
         if (!Cooldown.hasCooldown(player, 10, "§4[§c§lAP§4] §4You have to wait {secondsLeft} before you can use this command again!")) {
-            Player target = Bukkit.getPlayerExact(args[0]);
-            if (target == null) {
-                player.sendMessage(prefix + args[0] + " is not online or not correct.");
-                return;
-            }
             Cooldown.giveCooldown(player);
 
             Bukkit.getOnlinePlayers().forEach(all ->
@@ -337,13 +286,8 @@ public class ScriptCommands extends CommandCore {
     }
 
     @Command(name = "welcome")
-    public void welcome(Player player, String[] args) {
+    public void welcome(Player player) {
         if (!Cooldown.hasCooldown(player, 10, "§4[§c§lAP§4] §4You have to wait {secondsLeft} before you can use this command again!")) {
-            Player target = Bukkit.getPlayerExact(args[0]);
-            if (target == null) {
-                player.sendMessage(prefix + args[0] + " is not online or not correct.");
-                return;
-            }
             Cooldown.giveCooldown(player);
 
             Bukkit.getOnlinePlayers().forEach(all ->
@@ -353,13 +297,8 @@ public class ScriptCommands extends CommandCore {
     }
 
     @Command(name = "clap")
-    public void clap(Player player, String[] args) {
+    public void clap(Player player) {
         if (!Cooldown.hasCooldown(player, 10, "§4[§c§lAP§4] §4You have to wait {secondsLeft} before you can use this command again!")) {
-            Player target = Bukkit.getPlayerExact(args[0]);
-            if (target == null) {
-                player.sendMessage(prefix + args[0] + " is not online or not correct.");
-                return;
-            }
             Cooldown.giveCooldown(player);
 
             Bukkit.getOnlinePlayers().forEach(all ->
