@@ -3,14 +3,18 @@ package api.brainsynder.commands;
 import api.brainsynder.Core;
 import api.brainsynder.Utils.Cooldown;
 import api.brainsynder.Utils.FloatingItem;
+import api.brainsynder.Utils.RainbowLetters;
 import api.brainsynder.commands.api.Command;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import simple.brainsynder.api.ItemMaker;
 import simple.brainsynder.api.ParticleMaker;
+import simple.brainsynder.math.MathUtils;
 import simple.brainsynder.wrappers.MaterialWrapper;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -48,11 +52,20 @@ public class CommandDisco extends CommandCore {
                         cancel();
                         return;
                     }
-                    Random random = new Random();
                     for (ParticleMaker maker : particles) {
                         maker.sendToLocation(item.getArmorStand().getEyeLocation());
                     }
-                    RandomRainbowLetters letters = new RandomRainbowLetters("DISCO");
+
+                    List<String> rainbow = new ArrayList<>();
+                    for (int i = 0; i < 16; i++) {
+                        int value = MathUtils.random(0, 16);
+                        ChatColor color = ChatColor.values()[value];
+                        if (color == null) continue;
+                        if (!color.isColor()) continue;
+                        rainbow.add("§" + color.getChar());
+                    }
+
+                    RainbowLetters letters = new RainbowLetters("DISCO", rainbow);
                     item.setName(letters.getText());
                     item.setItem(new ItemMaker(MaterialWrapper.STAINED_GLASS, datas.get(new Random().nextInt(datas.size()))).create());
                 }
