@@ -10,7 +10,7 @@ import java.util.Random;
 public class CommandQuote extends CommandCore {
 
     @Command(name = "quotes")
-    public void quotes (Player commandSender, String[] args) {
+    public void quotes(Player commandSender, String[] args) {
         if (args.length == 0) {
             if (!Core.get().quotes.isEmpty()) {
                 Random r = new Random();

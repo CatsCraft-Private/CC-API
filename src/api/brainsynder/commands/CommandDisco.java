@@ -27,7 +27,7 @@ public class CommandDisco extends CommandCore {
             new ParticleMaker(ParticleMaker.Particle.WATER_WAKE, 8, 0.6),
             new ParticleMaker(ParticleMaker.Particle.SNOWBALL, 8, 0.598)
     );
-    
+
     @Command(name = "disco")
     public void run(Player p) {
         if (Core.get().isBlockCommands()) {
@@ -42,7 +42,8 @@ public class CommandDisco extends CommandCore {
             FloatingItem item = new FloatingItem(p.getLocation());
             item.spawn(new ItemMaker(MaterialWrapper.STAINED_GLASS, datas.get(new Random().nextInt(datas.size()))).create(), true);
             new BukkitRunnable() {
-                @Override public void run() {
+                @Override
+                public void run() {
                     if (i[0] == 1) {
                         cancel();
                         return;
@@ -57,7 +58,8 @@ public class CommandDisco extends CommandCore {
                 }
             }.runTaskTimerAsynchronously(Core.get(), 0, 5);
             new BukkitRunnable() {
-                @Override public void run() {
+                @Override
+                public void run() {
                     if (i[0] == 0) {
                         item.delete();
                         i[0] = 1;

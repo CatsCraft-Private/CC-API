@@ -19,64 +19,68 @@ import java.util.Arrays;
 import java.util.List;
 
 public class RainbowLetters {
+    private static final List<String> RAINBOW = Arrays.asList("§4", "§c", "§6", "§e", "§a", "§2", "§b", "§3", "§9", "§1", "§5", "§d");
     private int place = 0;
     private String text = "You did not provide any text.";
     private String fancyText = "§4You did not provide any text";
-    private static final List<String> RAINBOW = Arrays.asList("§4", "§c", "§6", "§e", "§a", "§2", "§b", "§3", "§9", "§1", "§5", "§d");
     private List<String> rainbowArray = null;
     private String prefix = "";
 
-    public RainbowLetters (String text) {
+    public RainbowLetters(String text) {
         this.place = 0;
-        if(text != null) {
+        if (text != null) {
             this.text = text;
         }
 
-        if(this.rainbowArray == null) {
+        if (this.rainbowArray == null) {
             this.rainbowArray = RAINBOW;
         }
 
         this.updateFancy();
     }
 
-    public RainbowLetters (String text, String formatCode) {
+    public RainbowLetters(String text, String formatCode) {
         this.place = 0;
-        if(text != null) {
+        if (text != null) {
             this.text = text;
         }
 
-        if(formatCode != null) {
+        if (formatCode != null) {
             this.prefix = formatCode;
         }
 
-        if(this.rainbowArray == null) {
+        if (this.rainbowArray == null) {
             this.rainbowArray = RAINBOW;
         }
 
         this.updateFancy();
     }
 
-    public RainbowLetters (String text, List< String > rainbowArray) {
+    public RainbowLetters(String text, List<String> rainbowArray) {
         this.place = 0;
-        if(text != null) {
+        if (text != null) {
             this.text = text;
         }
 
-        if(this.rainbowArray == null) {
+        if (this.rainbowArray == null) {
             this.rainbowArray = rainbowArray;
         }
 
         this.updateFancy();
     }
 
+    public static List<String> getDefaultRainbow() {
+        return RAINBOW;
+    }
+
     private void updateFancy() {
         int spot = this.place;
         StringBuilder fancyText = new StringBuilder();
-        for(char l : this.text.toCharArray()) {
+        for (char l : this.text.toCharArray()) {
             String letter = Character.toString(l);
-            if(!letter.equalsIgnoreCase(" ")) {
+            if (!letter.equalsIgnoreCase(" ")) {
                 fancyText.append(this.rainbowArray.get(spot)).append(this.prefix).append(letter);
-                if(spot == this.rainbowArray.size() - 1) {
+                if (spot == this.rainbowArray.size() - 1) {
                     spot = 0;
                 } else {
                     ++spot;
@@ -90,7 +94,7 @@ public class RainbowLetters {
     }
 
     public void moveRainbow() {
-        if(this.rainbowArray.size() - 1 == this.place) {
+        if (this.rainbowArray.size() - 1 == this.place) {
             this.place = 0;
         } else {
             ++this.place;
@@ -100,7 +104,7 @@ public class RainbowLetters {
     }
 
     public void moveRainbowRight() {
-        if(this.place == 0) {
+        if (this.place == 0) {
             this.place = this.rainbowArray.size() - 1;
         } else {
             --this.place;
@@ -117,15 +121,15 @@ public class RainbowLetters {
         return this.fancyText;
     }
 
+    public int getPlace() {
+        return this.place;
+    }
+
     public void setPlace(int place) {
-        if(place <= RAINBOW.size() - 1 && place >= 0) {
+        if (place <= RAINBOW.size() - 1 && place >= 0) {
             this.place = place;
             this.updateFancy();
         }
-    }
-
-    public int getPlace() {
-        return this.place;
     }
 
     public List<String> getRainbow() {
@@ -138,9 +142,5 @@ public class RainbowLetters {
 
     public void setFormatPrefix(String prefix) {
         this.prefix = prefix;
-    }
-
-    public static List<String> getDefaultRainbow() {
-        return RAINBOW;
     }
 }

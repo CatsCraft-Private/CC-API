@@ -25,17 +25,42 @@ import java.util.zip.GZIPOutputStream;
 public class OnlineTime implements Listener {
     private static Map<UUID, Long> timeMap = new HashMap<>();
     private static List<UUID> toRemove = new ArrayList<>();
-    private static Map<UUID, Long> currentTimes = new HashMap<> ();
-    
+    private static Map<UUID, Long> currentTimes = new HashMap<>();
+
+    public static void playerJoin(UUID id) {
+        timeMap.put(id, System.currentTimeMillis());
+    }
+
+    public static void playerLeave(UUID id) {
+        playerLeave(id, true);
+    }
+
+    static void playerLeave(UUID id, boolean addTimes) {
+        if (addTimes) {
+            if (!toRemove.contains(id)) toRemove.add(id);
+            addPlayTime(id);
+        }
+        timeMap.remove(id);
+    }
+
+    private static void addPlayTime(UUID id) {
+        if (!timeMap.containsKey(id)) return;
+        if (currentTimes.containsKey(id)) currentTimes.remove(id);
+        long saved = timeMap.get(id);
+        long current = System.currentTimeMillis();
+        long newTime = (current - saved);
+        currentTimes.put(id, newTime);
+    }
+
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         if (timeMap.containsKey(e.getPlayer().getUniqueId())) {
             playerLeave(e.getPlayer().getUniqueId());
         }
-        
+
         playerJoin(e.getPlayer().getUniqueId());
     }
-    
+
     @EventHandler
     public void onLeave(PlayerQuitEvent e) {
         if (timeMap.containsKey(e.getPlayer().getUniqueId())) {
@@ -43,7 +68,7 @@ public class OnlineTime implements Listener {
         }
         AFKPlayer.getPlayer(e.getPlayer().getUniqueId()).remove();
     }
-    
+
     @EventHandler
     public void onLeave(PlayerKickEvent e) {
         if (timeMap.containsKey(e.getPlayer().getUniqueId())) {
@@ -51,7 +76,7 @@ public class OnlineTime implements Listener {
         }
         AFKPlayer.getPlayer(e.getPlayer().getUniqueId()).remove();
     }
-    
+
     @EventHandler
     public void onMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();
@@ -64,32 +89,7 @@ public class OnlineTime implements Listener {
             }
         }
     }
-    
-    public static void playerJoin(UUID id) {
-        timeMap.put(id, System.currentTimeMillis());
-    }
-    
-    public static void playerLeave(UUID id) {
-        playerLeave (id, true);
-    }
-    
-    static void playerLeave(UUID id, boolean addTimes) {
-        if (addTimes) {
-            if (!toRemove.contains(id)) toRemove.add(id);
-            addPlayTime(id);
-        }
-        timeMap.remove(id);
-    }
-    
-    private static void addPlayTime(UUID id) {
-        if (!timeMap.containsKey(id)) return;
-        if (currentTimes.containsKey(id)) currentTimes.remove(id);
-        long saved = timeMap.get(id);
-        long current = System.currentTimeMillis();
-        long newTime = (current - saved);
-        currentTimes.put(id, newTime);
-    }
-    
+
     public static class AFKCheckTimer extends BukkitRunnable {
         @Override
         public void run() {
@@ -118,11 +118,11 @@ public class OnlineTime implements Listener {
             }
         }
     }
-    
+
     public static class DatabaseUpload extends BukkitRunnable {
-        private static JSONArray array = new JSONArray();
         private static final String _URL = "http://onlinetime.tk/update.php?server={server}&data=";
-        
+        private static JSONArray array = new JSONArray();
+
         static byte[] gzip(String input) {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             GZIPOutputStream gzos = null;
@@ -141,17 +141,13 @@ public class OnlineTime implements Listener {
             }
             return baos.toByteArray();
         }
-        
-        @Override public void run() {
-            forceUpdate();
-        }
-        
+
         public static void forceUpdate() {
             if (!Core.get().getConfiguration().isSet("ServerName")) return;
             if (Core.get().getConfiguration().getString("ServerName", false).equals("off")) return;
             if (timeMap.isEmpty() && currentTimes.isEmpty()) return;
             array.clear(); // Clears the previously sent data
-            
+
             // Reloads the timeMap to re-add non-afk players
             if (!Bukkit.getOnlinePlayers().isEmpty()) {
                 for (Player player : Bukkit.getOnlinePlayers()) {
@@ -162,7 +158,7 @@ public class OnlineTime implements Listener {
                     }
                 }
             }
-            
+
             // Updates the current online time and resets it.
             if (!timeMap.isEmpty())
                 for (UUID uuid : timeMap.keySet()) {
@@ -178,7 +174,7 @@ public class OnlineTime implements Listener {
                     }
                     addPlayTime(uuid);
                 }
-            
+
             // Adds the online time to a JSONObject in preparation to uploading
             if (!currentTimes.isEmpty())
                 for (UUID uuid : currentTimes.keySet()) {
@@ -192,7 +188,7 @@ public class OnlineTime implements Listener {
                     json.put("STORAGE_TIME", currentTimes.get(uuid));
                     array.add(json);
                 }
-            
+
             currentTimes.clear();
             if (!toRemove.isEmpty())
                 for (UUID uuid : toRemove) {
@@ -203,7 +199,7 @@ public class OnlineTime implements Listener {
                     }
                 }
             toRemove.clear();
-            
+
             /**
              * Uploads the data to the Site.
              *
@@ -226,7 +222,7 @@ public class OnlineTime implements Listener {
                 System.out.println("Notice: Player Online Times have been updated.");
             }
         }
-        
+
         private static int upload() {
             try {
                 URL url = new URL(_URL.replace("{server}", Core.get().getConfiguration().getString("ServerName", false))
@@ -247,7 +243,7 @@ public class OnlineTime implements Listener {
                 String response = reader.readLine(); // Retrieve the first line on the site.
                 os.close(); // Close the Output Stream to prevent Memory leaks
                 reader.close(); // Close the Reader to prevent Memory leaks
-                
+
                 if (response != null) {
                     if (response.startsWith("ERR")) {
                         return 500; // If the site contains ANY text print and Error: 500
@@ -258,6 +254,11 @@ public class OnlineTime implements Listener {
             } catch (Exception ignored) {
             }
             return 200; // If nothing bad happens, then print the OK code
+        }
+
+        @Override
+        public void run() {
+            forceUpdate();
         }
     }
 }

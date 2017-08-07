@@ -16,21 +16,21 @@ import org.bukkit.entity.Player;
 import java.util.HashMap;
 
 public class CommandCooldown {
-	private static HashMap<String, Long> RGCooldown = new HashMap<> ();
+    private static HashMap<String, Long> RGCooldown = new HashMap<>();
 
-	public static boolean hasCooldown (Player p){
-		int RGtime = Core.get ().getConfig ().getInt ("Cooldown-Seconds");
-		if (RGCooldown.containsKey (p.getName ())) {
-			long secondsLeft = RGCooldown.get (p.getName ()) / 1000L + RGtime - System.currentTimeMillis () / 1000L;
-			if (secondsLeft > 0L) {
-				p.sendMessage ("§eCatsCraft§6> §7This command has a cooldown with " + secondsLeft + " seconds left.");
-				return true;
-			}
-		}
-		return false;
-	}
+    public static boolean hasCooldown(Player p) {
+        int RGtime = Core.get().getConfig().getInt("Cooldown-Seconds");
+        if (RGCooldown.containsKey(p.getName())) {
+            long secondsLeft = RGCooldown.get(p.getName()) / 1000L + RGtime - System.currentTimeMillis() / 1000L;
+            if (secondsLeft > 0L) {
+                p.sendMessage("§eCatsCraft§6> §7This command has a cooldown with " + secondsLeft + " seconds left.");
+                return true;
+            }
+        }
+        return false;
+    }
 
-	public static void giveCooldown (Player p){
-		RGCooldown.put (p.getName (), System.currentTimeMillis ());
-	}
+    public static void giveCooldown(Player p) {
+        RGCooldown.put(p.getName(), System.currentTimeMillis());
+    }
 }

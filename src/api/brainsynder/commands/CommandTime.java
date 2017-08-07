@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 public class CommandTime extends CommandCore {
     private ExpireHashMap<String, Object> playerCache = new ExpireHashMap<>();
-    
+
     @Command(name = "onlinetime")
     public void run(Player p) {
         if (!Core.get().getConfiguration().isSet("ServerName")) return;
@@ -40,7 +40,7 @@ public class CommandTime extends CommandCore {
                 Object seconds1 = obj.get("seconds");
                 p.sendMessage("§7Weekly Online Time: §c" + days1 + " §eDay(s) §6| §c" + hours1 + " §eHour(s) §6| §c" + minutes1 + " §eMinute(s) §6| §c" + seconds1 + " §eSecond(s)");
             }
-        }else {
+        } else {
             String server = Core.get().getConfiguration().getString("ServerName", false);
             System.setProperty("http.agent", "Chrome");
             try {

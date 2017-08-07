@@ -9,16 +9,16 @@ import org.bukkit.entity.Player;
 public class CommandBow extends CommandCore {
 
     @Command(name = "bow")
-    public void run (Player p) {
+    public void run(Player p) {
         if (Core.get().isBlockCommands()) {
             p.sendMessage(prefix + "Sorry, Chat Commands are disabled until further notice.");
             return;
         }
 
-        if (!Cooldown.hasCooldown (p)) {
-            Cooldown.giveCooldown (p);
+        if (!Cooldown.hasCooldown(p)) {
+            Cooldown.giveCooldown(p);
             Bukkit.getOnlinePlayers()
-                    .forEach(player -> player.sendMessage(prefix + p.getName () + " is now bowing. Thank you, Thank you!"));
+                    .forEach(player -> player.sendMessage(prefix + p.getName() + " is now bowing. Thank you, Thank you!"));
         }
     }
 }

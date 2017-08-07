@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import simple.brainsynder.sound.SoundMaker;
 
 public class CommandSpleef extends CommandCore {
-    
+
     @Command(name = "spleef")
     public void run(Player p, String[] args) {
         if (Core.get().isBlockCommands()) {
@@ -33,7 +33,7 @@ public class CommandSpleef extends CommandCore {
             timedDelay(p, Material.DIAMOND_SPADE, 20 * 3);
             sendParticle(target, Material.SNOW_BLOCK, 0.5F, 0.5F, 0.5F);
             SoundMaker.BLOCK_SNOW_STEP.playSound(p.getLocation(), 1.5F, 1.5F);
-            
+
         }
     }
 }

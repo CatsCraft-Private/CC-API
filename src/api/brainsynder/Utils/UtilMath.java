@@ -16,6 +16,11 @@ public class UtilMath {
     public static final float PI2 = 6.2831855F;
     public static final float SQRT_3 = 1.73205F;
     public static final float E = 2.7182817F;
+    public static final float radiansToDegrees = 57.295776F;
+    public static final float radDeg = 57.295776F;
+    public static final float degreesToRadians = 0.017453292F;
+    public static final float degRad = 0.017453292F;
+    static final int ATAN2_DIM = (int) Math.sqrt(16384.0D);
     private static final int SIN_BITS = 14;
     private static final int SIN_MASK = 16383;
     private static final int SIN_COUNT = 16384;
@@ -23,15 +28,10 @@ public class UtilMath {
     private static final float degFull = 360.0F;
     private static final float radToIndex = 2607.5945F;
     private static final float degToIndex = 45.511112F;
-    public static final float radiansToDegrees = 57.295776F;
-    public static final float radDeg = 57.295776F;
-    public static final float degreesToRadians = 0.017453292F;
-    public static final float degRad = 0.017453292F;
     private static final int ATAN2_BITS = 7;
     private static final int ATAN2_BITS2 = 14;
     private static final int ATAN2_MASK = 16383;
     private static final int ATAN2_COUNT = 16384;
-    static final int ATAN2_DIM = (int)Math.sqrt(16384.0D);
     private static final float INV_ATAN2_DIM_MINUS_1;
     private static final int BIG_ENOUGH_INT = 16384;
     private static final double BIG_ENOUGH_FLOOR = 16384.0D;
@@ -40,7 +40,7 @@ public class UtilMath {
     private static final double BIG_ENOUGH_ROUND = 16384.5D;
 
     static {
-        INV_ATAN2_DIM_MINUS_1 = 1.0F / (float)(ATAN2_DIM - 1);
+        INV_ATAN2_DIM_MINUS_1 = 1.0F / (float) (ATAN2_DIM - 1);
     }
 
     public UtilMath() {
@@ -49,7 +49,7 @@ public class UtilMath {
     public static int getRandomNumberBetween(int min, int max) {
         Random foo = new Random();
         int randomNumber = foo.nextInt(max - min) + min;
-        return randomNumber == min?min + 1:randomNumber;
+        return randomNumber == min ? min + 1 : randomNumber;
     }
 
     public static boolean isInteger(String s) {
@@ -73,11 +73,11 @@ public class UtilMath {
     }
 
     public static double randomRange(double min, double max) {
-        return Math.random() < 0.5D?(1.0D - Math.random()) * (max - min) + min:Math.random() * (max - min) + min;
+        return Math.random() < 0.5D ? (1.0D - Math.random()) * (max - min) + min : Math.random() * (max - min) + min;
     }
 
     public static float randomRangeFloat(float min, float max) {
-        return (float)(Math.random() < 0.5D?(1.0D - Math.random()) * (double)(max - min) + (double)min:Math.random() * (double)(max - min) + (double)min);
+        return (float) (Math.random() < 0.5D ? (1.0D - Math.random()) * (double) (max - min) + (double) min : Math.random() * (double) (max - min) + (double) min);
     }
 
     public static Vector rotateAroundAxisY(Vector v, double angle) {
@@ -105,7 +105,7 @@ public class UtilMath {
     }
 
     public static int randomRangeInt(int min, int max) {
-        return (int)(Math.random() < 0.5D?(1.0D - Math.random()) * (double)(max - min) + (double)min:Math.random() * (double)(max - min) + (double)min);
+        return (int) (Math.random() < 0.5D ? (1.0D - Math.random()) * (double) (max - min) + (double) min : Math.random() * (double) (max - min) + (double) min);
     }
 
     public static Vector getRandomVector() {
@@ -118,12 +118,12 @@ public class UtilMath {
     public static Vector getRandomVectorline() {
         byte minz = 1;
         byte maxz = 3;
-        int rz = (int)(Math.random() * (double)(maxz - minz) + (double)minz);
+        int rz = (int) (Math.random() * (double) (maxz - minz) + (double) minz);
         double miny = -1.0D;
         double maxy = 1.0D;
         double ry = Math.random() * (maxy - miny) + miny;
         double x = -5.0D;
-        double z = (double)rz;
+        double z = (double) rz;
         return (new Vector(x, ry, z)).normalize();
     }
 
@@ -146,21 +146,21 @@ public class UtilMath {
         double x = 0.0D;
         double y = 0.0D;
         double z = 0.0D;
-        if(px < ex) {
+        if (px < ex) {
             x = 2.0D;
-        } else if(px > ex) {
+        } else if (px > ex) {
             x = -2.0D;
         }
 
-        if(py < ey) {
+        if (py < ey) {
             y = 1.0D;
-        } else if(py > ey) {
+        } else if (py > ey) {
             y = 1.0D;
         }
 
-        if(pz < ez) {
+        if (pz < ez) {
             z = 2.0D;
-        } else if(pz > ez) {
+        } else if (pz > ez) {
             z = -2.0D;
         }
 
@@ -178,21 +178,21 @@ public class UtilMath {
         double x = 0.0D;
         double y = 0.0D;
         double z = 0.0D;
-        if(px < ex) {
+        if (px < ex) {
             x = 2.0D;
-        } else if(px > ex) {
+        } else if (px > ex) {
             x = -2.0D;
         }
 
-        if(py < ey) {
+        if (py < ey) {
             y = 1.0D;
-        } else if(py > ey) {
+        } else if (py > ey) {
             y = 1.0D;
         }
 
-        if(pz < ez) {
+        if (pz < ez) {
             z = 2.0D;
-        } else if(pz > ez) {
+        } else if (pz > ez) {
             z = -2.0D;
         }
 
@@ -202,7 +202,7 @@ public class UtilMath {
     public static double trim(int degree, double d) {
         StringBuilder format = new StringBuilder("#.#");
 
-        for(int twoDForm = 1; twoDForm < degree; ++twoDForm) {
+        for (int twoDForm = 1; twoDForm < degree; ++twoDForm) {
             format.append('#');
         }
 
@@ -215,11 +215,11 @@ public class UtilMath {
     }
 
     public static double offset2d(Entity a, Entity b) {
-        return offset2d((Vector)a.getLocation().toVector(), (Vector)b.getLocation().toVector());
+        return offset2d((Vector) a.getLocation().toVector(), (Vector) b.getLocation().toVector());
     }
 
     public static double offset2d(Location a, Location b) {
-        return offset2d((Vector)a.toVector(), (Vector)b.toVector());
+        return offset2d((Vector) a.toVector(), (Vector) b.toVector());
     }
 
     public static double offset2d(Vector a, Vector b) {
@@ -229,11 +229,11 @@ public class UtilMath {
     }
 
     public static double offset(Entity a, Entity b) {
-        return offset((Vector)a.getLocation().toVector(), (Vector)b.getLocation().toVector());
+        return offset((Vector) a.getLocation().toVector(), (Vector) b.getLocation().toVector());
     }
 
     public static double offset(Location a, Location b) {
-        return offset((Vector)a.toVector(), (Vector)b.toVector());
+        return offset((Vector) a.toVector(), (Vector) b.toVector());
     }
 
     public static double offset(Vector a, Vector b) {
@@ -241,26 +241,26 @@ public class UtilMath {
     }
 
     public static final float sin(float radians) {
-        return UtilMath.Sin.table[(int)(radians * 2607.5945F) & 16383];
+        return UtilMath.Sin.table[(int) (radians * 2607.5945F) & 16383];
     }
 
     public static final float cos(float radians) {
-        return UtilMath.Sin.table[(int)((radians + 1.5707964F) * 2607.5945F) & 16383];
+        return UtilMath.Sin.table[(int) ((radians + 1.5707964F) * 2607.5945F) & 16383];
     }
 
     public static final float sinDeg(float degrees) {
-        return UtilMath.Sin.table[(int)(degrees * 45.511112F) & 16383];
+        return UtilMath.Sin.table[(int) (degrees * 45.511112F) & 16383];
     }
 
     public static final float cosDeg(float degrees) {
-        return UtilMath.Sin.table[(int)((degrees + 90.0F) * 45.511112F) & 16383];
+        return UtilMath.Sin.table[(int) ((degrees + 90.0F) * 45.511112F) & 16383];
     }
 
     public static final float atan2(float y, float x) {
         float add;
         float mul;
-        if(x < 0.0F) {
-            if(y < 0.0F) {
+        if (x < 0.0F) {
+            if (y < 0.0F) {
                 y = -y;
                 mul = 1.0F;
             } else {
@@ -270,7 +270,7 @@ public class UtilMath {
             x = -x;
             add = -3.1415927F;
         } else {
-            if(y < 0.0F) {
+            if (y < 0.0F) {
                 y = -y;
                 mul = -1.0F;
             } else {
@@ -280,12 +280,12 @@ public class UtilMath {
             add = 0.0F;
         }
 
-        float invDiv = 1.0F / ((x < y?y:x) * INV_ATAN2_DIM_MINUS_1);
-        if(invDiv == 1.0F / 0.0) {
-            return ((float)Math.atan2((double)y, (double)x) + add) * mul;
+        float invDiv = 1.0F / ((x < y ? y : x) * INV_ATAN2_DIM_MINUS_1);
+        if (invDiv == 1.0F / 0.0) {
+            return ((float) Math.atan2((double) y, (double) x) + add) * mul;
         } else {
-            int xi = (int)(x * invDiv);
-            int yi = (int)(y * invDiv);
+            int xi = (int) (x * invDiv);
+            int yi = (int) (y * invDiv);
             return (UtilMath.Atan2.table[yi * ATAN2_DIM + xi] + add) * mul;
         }
     }
@@ -319,7 +319,7 @@ public class UtilMath {
     }
 
     public static int nextPowerOfTwo(int value) {
-        if(value == 0) {
+        if (value == 0) {
             return 1;
         } else {
             --value;
@@ -337,39 +337,39 @@ public class UtilMath {
     }
 
     public static int clamp(int value, int min, int max) {
-        return value < min?min:(value > max?max:value);
+        return value < min ? min : (value > max ? max : value);
     }
 
     public static short clamp(short value, short min, short max) {
-        return value < min?min:(value > max?max:value);
+        return value < min ? min : (value > max ? max : value);
     }
 
     public static float clamp(float value, float min, float max) {
-        return value < min?min:(value > max?max:value);
+        return value < min ? min : (value > max ? max : value);
     }
 
     public static int floor(float x) {
-        return (int)((double)x + 16384.0D) - 16384;
+        return (int) ((double) x + 16384.0D) - 16384;
     }
 
     public static int floorPositive(float x) {
-        return (int)x;
+        return (int) x;
     }
 
     public static int ceil(float x) {
-        return (int)((double)x + 16384.999999999996D) - 16384;
+        return (int) ((double) x + 16384.999999999996D) - 16384;
     }
 
     public static int ceilPositive(float x) {
-        return (int)((double)x + 0.9999999D);
+        return (int) ((double) x + 0.9999999D);
     }
 
     public static int round(float x) {
-        return (int)((double)x + 16384.5D) - 16384;
+        return (int) ((double) x + 16384.5D) - 16384;
     }
 
     public static int roundPositive(float x) {
-        return (int)(x + 0.5F);
+        return (int) (x + 0.5F);
     }
 
     public static boolean isZero(float value) {
@@ -392,11 +392,11 @@ public class UtilMath {
         static final float[] table = new float[16384];
 
         static {
-            for(int i = 0; i < UtilMath.ATAN2_DIM; ++i) {
-                for(int j = 0; j < UtilMath.ATAN2_DIM; ++j) {
-                    float x0 = (float)i / (float)UtilMath.ATAN2_DIM;
-                    float y0 = (float)j / (float)UtilMath.ATAN2_DIM;
-                    table[j * UtilMath.ATAN2_DIM + i] = (float)Math.atan2((double)y0, (double)x0);
+            for (int i = 0; i < UtilMath.ATAN2_DIM; ++i) {
+                for (int j = 0; j < UtilMath.ATAN2_DIM; ++j) {
+                    float x0 = (float) i / (float) UtilMath.ATAN2_DIM;
+                    float y0 = (float) j / (float) UtilMath.ATAN2_DIM;
+                    table[j * UtilMath.ATAN2_DIM + i] = (float) Math.atan2((double) y0, (double) x0);
                 }
             }
 
@@ -411,12 +411,12 @@ public class UtilMath {
 
         static {
             int i;
-            for(i = 0; i < 16384; ++i) {
-                table[i] = (float)Math.sin((double)(((float)i + 0.5F) / 16384.0F * 6.2831855F));
+            for (i = 0; i < 16384; ++i) {
+                table[i] = (float) Math.sin((double) (((float) i + 0.5F) / 16384.0F * 6.2831855F));
             }
 
-            for(i = 0; i < 360; i += 90) {
-                table[(int)((float)i * 45.511112F) & 16383] = (float)Math.sin((double)((float)i * 0.017453292F));
+            for (i = 0; i < 360; i += 90) {
+                table[(int) ((float) i * 45.511112F) & 16383] = (float) Math.sin((double) ((float) i * 0.017453292F));
             }
 
         }

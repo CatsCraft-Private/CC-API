@@ -28,7 +28,7 @@ public class CommandArmorSee extends CommandCore {
                 if (meta.hasLore()) {
                     data.add("&eItemLore: ");
                     int i = 1;
-                    for (String s : meta.getLore()){
+                    for (String s : meta.getLore()) {
                         data.add("   &eLine: &6" + i + "  &r" + s);
                         i++;
                     }
@@ -52,7 +52,7 @@ public class CommandArmorSee extends CommandCore {
     }
 
     @Command(name = "armorsee")
-    public void armorSee (Player player, String[] args){
+    public void armorSee(Player player, String[] args) {
         if (args.length == 0) {
             player.sendMessage(this.prefix + "/armorsee <player>");
             return;

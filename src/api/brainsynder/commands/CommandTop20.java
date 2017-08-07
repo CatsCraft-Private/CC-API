@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class CommandTop20 extends CommandCore {
-    
+
     @Command(name = "top20")
     public void run(Player p) {
         if (!Core.get().getConfiguration().isSet("ServerName")) return;
@@ -28,7 +28,7 @@ public class CommandTop20 extends CommandCore {
         }
         Cooldown.giveCooldown(p);
         if (cache.containsKey("top20")) {
-            JSONObject json = (JSONObject)cache.get("top20");
+            JSONObject json = (JSONObject) cache.get("top20");
             JSONArray array = (JSONArray) json.get("list");
             int i = 1;
             List<String> lines = new ArrayList<>();
@@ -54,7 +54,7 @@ public class CommandTop20 extends CommandCore {
             }
             for (String s : lines)
                 p.sendMessage(s);
-        }else {
+        } else {
             String server = Core.get().getConfiguration().getString("ServerName", false);
             System.setProperty("http.agent", "Chrome");
             try {

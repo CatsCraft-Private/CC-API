@@ -12,13 +12,13 @@ import simple.brainsynder.utils.Reflection;
 public class CommandDabAttack extends CommandCore {
 
     @Command(name = "dabattack")
-    public void run (Player p) {
+    public void run(Player p) {
         if (Core.get().isBlockCommands()) {
             p.sendMessage(prefix + "Sorry, Chat Commands are disabled until further notice.");
             return;
         }
 
-        if (!Cooldown.hasCooldown (p)) {
+        if (!Cooldown.hasCooldown(p)) {
             if (Core.get().isBlockDabAttack()) {
                 p.sendMessage(prefix + "Someone is already having a DabAttack");
                 return;
@@ -29,8 +29,9 @@ public class CommandDabAttack extends CommandCore {
             new BukkitRunnable() {
                 boolean var = false;
                 int count = 0;
-        
-                @Override public void run() {
+
+                @Override
+                public void run() {
                     IActionMessage message = Reflection.getActionMessage();
                     if (!p.isOnline()) {
                         Core.get().setBlockDabAttack(false);

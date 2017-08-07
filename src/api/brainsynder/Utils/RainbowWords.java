@@ -19,130 +19,127 @@ import java.util.Arrays;
 import java.util.List;
 
 public class RainbowWords {
-	private int place = 0;
-	private String text = "You did not provide any text.";
-	private String fancyText = "§4You did not provide any text";
-	private static final List< String > RAINBOW = Arrays.asList ("§4", "§c", "§6", "§e", "§a", "§2", "§b", "§3", "§9", "§1", "§5", "§d");
-	private List< String > rainbowArray = null;
-	private String prefix = "";
+    private static final List<String> RAINBOW = Arrays.asList("§4", "§c", "§6", "§e", "§a", "§2", "§b", "§3", "§9", "§1", "§5", "§d");
+    private int place = 0;
+    private String text = "You did not provide any text.";
+    private String fancyText = "§4You did not provide any text";
+    private List<String> rainbowArray = null;
+    private String prefix = "";
 
-	public RainbowWords (String text) {
-		this.place = 0;
-		if (text != null) {
-			this.text = text;
-		}
+    public RainbowWords(String text) {
+        this.place = 0;
+        if (text != null) {
+            this.text = text;
+        }
 
-		if (this.rainbowArray == null) {
-			this.rainbowArray = RAINBOW;
-		}
+        if (this.rainbowArray == null) {
+            this.rainbowArray = RAINBOW;
+        }
 
-		this.updateFancy ();
-	}
+        this.updateFancy();
+    }
 
-	public RainbowWords (String text, String formatCode) {
-		this.place = 0;
-		if (text != null) {
-			this.text = text;
-		}
+    public RainbowWords(String text, String formatCode) {
+        this.place = 0;
+        if (text != null) {
+            this.text = text;
+        }
 
-		if (formatCode != null) {
-			this.prefix = formatCode;
-		}
+        if (formatCode != null) {
+            this.prefix = formatCode;
+        }
 
-		if (this.rainbowArray == null) {
-			this.rainbowArray = RAINBOW;
-		}
+        if (this.rainbowArray == null) {
+            this.rainbowArray = RAINBOW;
+        }
 
-		this.updateFancy ();
-	}
+        this.updateFancy();
+    }
 
-	public RainbowWords (String text, List< String > rainbowArray) {
-		this.place = 0;
-		if (text != null) {
-			this.text = text;
-		}
+    public RainbowWords(String text, List<String> rainbowArray) {
+        this.place = 0;
+        if (text != null) {
+            this.text = text;
+        }
 
-		if (this.rainbowArray == null) {
-			this.rainbowArray = rainbowArray;
-		}
+        if (this.rainbowArray == null) {
+            this.rainbowArray = rainbowArray;
+        }
 
-		this.updateFancy ();
-	}
+        this.updateFancy();
+    }
 
-	private void updateFancy () {
-		int spot = this.place;
-		StringBuilder fancyText = new StringBuilder();
-		for ( String letter : this.text.split (" ") ) {
-			if (letter.equals (text.split (" ")[0])) {
-				fancyText.append(this.rainbowArray.get(spot)).append(letter);
-			}else{
-				fancyText.append(' ').append(this.rainbowArray.get(spot)).append(letter);
-			}
-			if (spot == this.rainbowArray.size () - 1) {
-				spot = 0;
-			}
-			else {
-				++spot;
-			}
-		}
+    public static List<String> getDefaultRainbow() {
+        return RAINBOW;
+    }
 
-		this.fancyText = fancyText.toString();
-	}
+    private void updateFancy() {
+        int spot = this.place;
+        StringBuilder fancyText = new StringBuilder();
+        for (String letter : this.text.split(" ")) {
+            if (letter.equals(text.split(" ")[0])) {
+                fancyText.append(this.rainbowArray.get(spot)).append(letter);
+            } else {
+                fancyText.append(' ').append(this.rainbowArray.get(spot)).append(letter);
+            }
+            if (spot == this.rainbowArray.size() - 1) {
+                spot = 0;
+            } else {
+                ++spot;
+            }
+        }
 
-	public void moveRainbow () {
-		if (this.rainbowArray.size () - 1 == this.place) {
-			this.place = 0;
-		}
-		else {
-			++this.place;
-		}
+        this.fancyText = fancyText.toString();
+    }
 
-		this.updateFancy ();
-	}
+    public void moveRainbow() {
+        if (this.rainbowArray.size() - 1 == this.place) {
+            this.place = 0;
+        } else {
+            ++this.place;
+        }
 
-	public void moveRainbowRight () {
-		if (this.place == 0) {
-			this.place = this.rainbowArray.size () - 1;
-		}
-		else {
-			--this.place;
-		}
+        this.updateFancy();
+    }
 
-		this.updateFancy ();
-	}
+    public void moveRainbowRight() {
+        if (this.place == 0) {
+            this.place = this.rainbowArray.size() - 1;
+        } else {
+            --this.place;
+        }
 
-	public String getOrigonalText () {
-		return this.text;
-	}
+        this.updateFancy();
+    }
 
-	public String getText () {
-		return this.fancyText;
-	}
+    public String getOrigonalText() {
+        return this.text;
+    }
 
-	public void setPlace (int place) {
-		if (place <= RAINBOW.size () - 1 && place >= 0) {
-			this.place = place;
-			this.updateFancy ();
-		}
-	}
+    public String getText() {
+        return this.fancyText;
+    }
 
-	public int getPlace () {
-		return this.place;
-	}
+    public int getPlace() {
+        return this.place;
+    }
 
-	public List< String > getRainbow () {
-		return this.rainbowArray;
-	}
+    public void setPlace(int place) {
+        if (place <= RAINBOW.size() - 1 && place >= 0) {
+            this.place = place;
+            this.updateFancy();
+        }
+    }
 
-	public String getFormatPrefix () {
-		return this.prefix;
-	}
+    public List<String> getRainbow() {
+        return this.rainbowArray;
+    }
 
-	public void setFormatPrefix (String prefix) {
-		this.prefix = prefix;
-	}
+    public String getFormatPrefix() {
+        return this.prefix;
+    }
 
-	public static List< String > getDefaultRainbow () {
-		return RAINBOW;
-	}
+    public void setFormatPrefix(String prefix) {
+        this.prefix = prefix;
+    }
 }

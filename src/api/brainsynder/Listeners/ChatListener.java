@@ -41,14 +41,14 @@ public class ChatListener implements Listener {
             Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Core.get(), () -> p.performCommand("afk"), 20L);
         }
     }
-    
+
     @EventHandler
     public void pick(PlayerPickupItemEvent e) {
         if (e.getItem().hasMetadata("takeable")) {
             e.setCancelled(true);
         }
     }
-    
+
     @EventHandler
     public void pick(InventoryPickupItemEvent e) {
         if (e.getItem().hasMetadata("takeable")) {
@@ -127,7 +127,7 @@ public class ChatListener implements Listener {
     }
 
     @EventHandler
-    public void onSign (SignChangeEvent e){
+    public void onSign(SignChangeEvent e) {
         int i = 0;
         for (String msg : e.getLines()) {
 
@@ -155,7 +155,7 @@ public class ChatListener implements Listener {
             i++;
         }
     }
-    
+
     public String scramble(String input) {
         StringBuilder out = new StringBuilder();
         for (String part : input.split(" ")) {
@@ -172,7 +172,7 @@ public class ChatListener implements Listener {
         }
         return out.toString().trim();
     }
-    
+
     @EventHandler
     public void onInvPickup(InventoryPickupItemEvent e) {
         if (e.getInventory().getType() == InventoryType.HOPPER) {
@@ -181,14 +181,14 @@ public class ChatListener implements Listener {
             }
         }
     }
-    
+
     @EventHandler
     public void onEdit(PlayerArmorStandManipulateEvent e) {
         if (e.getRightClicked().hasMetadata("NO_TOUCH")) {
             e.setCancelled(true);
         }
     }
-    
+
     @EventHandler
     private void onSpawn(EntitySpawnEvent e) {
         if (e.isCancelled()) {

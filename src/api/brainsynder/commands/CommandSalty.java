@@ -11,14 +11,14 @@ import simple.brainsynder.api.ParticleMaker;
 public class CommandSalty extends CommandCore {
 
     @Command(name = "salty")
-    public void run (Player p) {
+    public void run(Player p) {
         if (Core.get().isBlockCommands()) {
             p.sendMessage(prefix + "Sorry, Chat Commands are disabled until further notice.");
             return;
         }
 
-        if (!Cooldown.hasCooldown (p)) {
-            Cooldown.giveCooldown (p);
+        if (!Cooldown.hasCooldown(p)) {
+            Cooldown.giveCooldown(p);
             p.sendMessage(prefix + "Why you so salty?");
             Bukkit.getOnlinePlayers()
                     .stream().filter(players -> (!players.getUniqueId().equals(p.getUniqueId())))

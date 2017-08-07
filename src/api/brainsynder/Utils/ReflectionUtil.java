@@ -38,21 +38,24 @@ public class ReflectionUtil {
     public static <T> T initiateClass(Class<?> clazz) {
         try {
             return (T) clazz.newInstance();
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
         return null;
     }
 
     public static <T> T initiateClass(Constructor<?> constructor, Object... args) {
         try {
             return (T) constructor.newInstance(args);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
         return null;
     }
 
     public static Constructor<?> fillConstructor(Class<?> clazz, Class<?>... values) {
         try {
             return clazz.getDeclaredConstructor(values);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
         return null;
     }
 

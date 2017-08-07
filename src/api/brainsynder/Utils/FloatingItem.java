@@ -24,14 +24,14 @@ public class FloatingItem {
     private String name = null;
     private boolean floatLoop;
     private List<ArmorStand> texts = new ArrayList<>();
-    
+
     public FloatingItem(Location location) {
         this.location = location;
         this.floatLoop = true;
-        
+
         items.add(this);
     }
-    
+
     public static void enable(JavaPlugin plugin) {
         new BukkitRunnable() {
             @Override
@@ -41,11 +41,21 @@ public class FloatingItem {
                         FloatingItem.getFloatingItems().stream()
                                 .filter(i -> i.getArmorStand() != null)
                                 .forEach(FloatingItem::update);
-                }catch (Exception e){}
+                } catch (Exception e) {
+                }
             }
         }.runTaskTimerAsynchronously(plugin, 0, 1);
     }
-    
+
+    public static void deleteAll() {
+        items.forEach(FloatingItem::delete);
+        items.clear();
+    }
+
+    public static List<FloatingItem> getFloatingItems() {
+        return items;
+    }
+
     public void spawn(ItemStack itemStack, boolean big, String[] text) {
         armorStand = (ArmorStand) location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
         armorStand.setGravity(false);
@@ -54,13 +64,13 @@ public class FloatingItem {
         armorStand.setSmall(big ? false : true);
         armorStand.setMetadata("NO_TOUCH", new FixedMetadataValue(Core.get(), "NO_TOUCH"));
         this.item = itemStack;
-        
+
         this.sameLocation = armorStand.getLocation();
-        
-        
+
+
         addText(this, text);
     }
-    
+
     public void spawn(ItemStack itemStack, boolean big) {
         Core.get().spawnMe = true;
         armorStand = (ArmorStand) location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
@@ -70,10 +80,10 @@ public class FloatingItem {
         armorStand.setSmall(big ? false : true);
         armorStand.setMetadata("NO_TOUCH", new FixedMetadataValue(Core.get(), "NO_TOUCH"));
         this.item = itemStack;
-        
+
         this.sameLocation = armorStand.getLocation();
     }
-    
+
     public void update() {
         if (armorStand == null) return;
         if (armorStand.isDead()) return;
@@ -85,29 +95,29 @@ public class FloatingItem {
         if (!this.floatLoop) {
             location.add(0, 0.01, 0);
             location.setYaw((location.getYaw() + 7.5F));
-            
+
             armorStand.teleport(location);
-            
+
             if (armorStand.getLocation().getY() > (0.25 + sameLocation.getY()))
                 this.floatLoop = true;
         } else {
             location.subtract(0, 0.01, 0);
             location.setYaw((location.getYaw() - 7.5F));
-            
+
             armorStand.teleport(location);
-            
+
             if (armorStand.getLocation().getY() < (-0.25 + sameLocation.getY()))
                 this.floatLoop = false;
         }
     }
-    
+
     private void addText(FloatingItem floatingItem, String... text) {
         ArmorStand armorStand = null;
         List<String> lines = Arrays.asList(text);
         lines = Lists.reverse(lines);
-        
+
         double y = 0.25D;
-        
+
         for (String line : lines) {
             armorStand = (ArmorStand) location.getWorld().spawnEntity(location.clone().add(0, y, 0), EntityType.ARMOR_STAND);
             armorStand.setGravity(false);
@@ -115,15 +125,15 @@ public class FloatingItem {
             armorStand.setCustomNameVisible(true);
             armorStand.setVisible(false);
             y += 0.21D;
-            
+
             texts.add(armorStand);
         }
     }
-    
+
     public void deleteAllText() {
         texts.forEach(Entity::remove);
     }
-    
+
     public void delete() {
         if (!texts.isEmpty())
             deleteAllText();
@@ -132,28 +142,19 @@ public class FloatingItem {
         armorStand = null;
         reset();
     }
-    
+
     public void reset() {
         items.remove(this);
     }
-    
-    public static void deleteAll() {
-        items.forEach(FloatingItem::delete);
-        items.clear();
-    }
-    
-    public static List<FloatingItem> getFloatingItems() {
-        return items;
-    }
-    
+
     public List<ArmorStand> getTexts() {
         return texts;
     }
-    
+
     public Location getLocation() {
         return location;
     }
-    
+
     public ArmorStand getArmorStand() {
         return armorStand;
     }

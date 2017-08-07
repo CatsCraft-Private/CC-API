@@ -35,7 +35,11 @@ public class Core extends JavaPlugin {
     private Configuration configuration;
     private boolean blockDabAttack = false;
     private boolean blockCommands = false;
-    
+
+    public static Core get() {
+        return instance;
+    }
+
     public void onEnable() {
         instance = this;
         CommandCore.registerCommands();
@@ -47,7 +51,7 @@ public class Core extends JavaPlugin {
             configuration.set("DatabaseUpdate-Interval", 300);
         }
         getServer().getPluginManager().registerEvents(new ChatListener(), this);
-        
+
         DateFormat dateFormat = new SimpleDateFormat("MM");
         Date date = new Date();
         if (dateFormat.format(date).equals("04")) {
@@ -59,7 +63,7 @@ public class Core extends JavaPlugin {
         if (!configuration.isSet("Cooldown-Seconds")) {
             configuration.set("Cooldown-Seconds", 10);
         }
-    
+
         loadQuotes();
         quotes = configuration.getStringList("Insperational-quotes");
         FloatingItem.enable(this);
@@ -76,8 +80,7 @@ public class Core extends JavaPlugin {
             }
         }
     }
-    
-    
+
     private void loadQuotes() {
         if ((!configuration.isSet("Insperational-quotes")) || (configuration.getStringList("Insperational-quotes").isEmpty())) {
             List<String> ideas = new ArrayList<>();
@@ -85,15 +88,11 @@ public class Core extends JavaPlugin {
             configuration.set("Insperational-quotes", ideas);
         }
     }
-    
+
     public void registerListener(Listener listenerClass) {
         Bukkit.getPluginManager().registerEvents(listenerClass, this);
     }
-    
-    public static Core get() {
-        return instance;
-    }
-    
+
     public void onDisable() {
         FloatingItem.deleteAll();
         DateFormat dateFormat = new SimpleDateFormat("MM");
@@ -117,12 +116,12 @@ public class Core extends JavaPlugin {
         return this.blockDabAttack;
     }
 
-    public boolean isBlockCommands() {
-        return this.blockCommands;
-    }
-
     public void setBlockDabAttack(boolean blockDabAttack) {
         this.blockDabAttack = blockDabAttack;
+    }
+
+    public boolean isBlockCommands() {
+        return this.blockCommands;
     }
 
     public void setBlockCommands(boolean blockCommands) {

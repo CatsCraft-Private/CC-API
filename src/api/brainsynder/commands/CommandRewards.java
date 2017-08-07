@@ -9,17 +9,18 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 public class CommandRewards extends CommandCore {
-    
+
+    private float step = 0.0F;
+
     @Command(name = "rewards")
     public void run(Player p) {
         if (Cooldown.hasCooldown(p)) {
             return;
         }
         Cooldown.giveCooldown(p);
-        
+
     }
-    
-    private float step = 0.0F;
+
     public void shape(Location location, ArmorStand stand) {
         for (int i = 0; i < 1; i++) {
             double inc = 6.283185307179586D / (10 * 20);

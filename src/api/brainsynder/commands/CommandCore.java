@@ -26,20 +26,21 @@ import java.util.List;
 import java.util.Random;
 
 public abstract class CommandCore implements CommandListener {
-    public ExpireHashMap<String, Object> cache = new ExpireHashMap<>();
-    public String prefix = "§eCatsCraft §6>> §7";
-    protected final List<String> allowed = Arrays.asList(
+    final List<String> allowed = Arrays.asList(
             "f3ff8cba-3d3e-493f-a6dc-4fc3e4ca0cc6",
             "19612e17-d090-483f-803c-e48efd0fe5a1",
             "05939e3d-a817-49d7-8390-be7ca48ac517",
             "4a4b597b-5415-4e6d-8c81-271cafa4d9d1",
             "58b9e74d-206e-439a-9675-54ca819c5de2"
     );
-    
-    public static void registerCommands () {
-    	CommandManager.register(new CommandStealCats());
-    	CommandManager.register(new CommandFurBall());
-    	CommandManager.register(new CommandCookieDough());
+    public String prefix = "§eCatsCraft §6>> §7";
+    ExpireHashMap<String, Object> cache = new ExpireHashMap<>();
+
+    public static void registerCommands() {
+        CommandManager.register(new ScriptCommands());
+        CommandManager.register(new CommandStealCats());
+        CommandManager.register(new CommandFurBall());
+        CommandManager.register(new CommandCookieDough());
         CommandManager.register(new CommandBow());
         CommandManager.register(new CommandComfort());
         CommandManager.register(new CommandCry());
@@ -59,54 +60,16 @@ public abstract class CommandCore implements CommandListener {
         CommandManager.register(new CommandTime());
         CommandManager.register(new CommandDisco());
         CommandManager.register(new CommandTop20());
-        CommandManager.register(new CommandQuote ());
-        //CommandManager.register(new CommandSpinner());
+        CommandManager.register(new CommandQuote());
     }
-    
-    public void sendParticle (Player p, ParticleMaker.Particle effect, float offX, float offY, float offZ) {
-        ParticleMaker maker = new ParticleMaker(effect, 0.0, 1, offX, offY, offZ);
-        maker.sendToPlayer(p);
-    }
-    
-    public void sendParticle (Player p, Material mat, float offX, float offY, float offZ) {
-        ParticleMaker maker = new ParticleMaker(ParticleMaker.Particle.ITEM_CRACK, 0.0, 40, offX, offY, offZ);
-        maker.setData(mat);
-        maker.sendToPlayer(p);
-    }
-    
-    public void sendParticle (Location loc, Material mat, float offX, float offY, float offZ) {
-        ParticleMaker maker = new ParticleMaker(ParticleMaker.Particle.ITEM_CRACK, 0.0, 40, offX, offY, offZ);
-        maker.setData(mat);
-        maker.sendToLocation(loc);
-    }
-    
-    public void timedDelay (final Player player, final Material mat, int time) {
-        final Item item = player.getWorld ().dropItem (player.getLocation (), new ItemStack(mat, 1));
-        item.setPickupDelay (Integer.MAX_VALUE);
-        item.setCustomNameVisible (true);
-        item.setCustomName ("§bSPLEEEFED!!!");
-        item.setMetadata ("takeable", new FixedMetadataValue(Core.get (), "takeable"));
-        new BukkitRunnable() {
-            @Override
-            public void run () {
-                item.remove ();
-                sendParticle (item.getLocation (), mat, 0.3F, 0.3F, 0.3F);
-            }
-        }.runTaskLater (Core.get (), time);
-    }
-    
-    public int randInt (int min, int max) {
-        Random rand = new Random ();
-        return rand.nextInt (max - min + 1) + min;
-    }
-    
+
     public static void destoryEntity(Player player, Entity entity) {
         Class<?> outEntityDestroy = Reflection.getNmsClass("PacketPlayOutEntityDestroy");
         Constructor<?> constructor = ReflectionUtil.fillConstructor(outEntityDestroy, Integer.TYPE);
         Object packet = ReflectionUtil.initiateClass(constructor, entity.getEntityId());
         Reflection.sendPacket(packet, player);
     }
-    
+
     protected static Object connectSite(String _URL) {
         try {
             URL url = new URL(_URL); // Encode and set the URL
@@ -118,15 +81,52 @@ public abstract class CommandCore implements CommandListener {
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream())); // Prepare to read the site
             String response = reader.readLine(); // Retrieve the first line on the site.
             reader.close(); // Close the Reader to prevent Memory leaks
-            
+
             if (response != null) {
                 if (response.startsWith("ERR")) {
                     return 500; // If the site contains ANY text print and Error: 500
                 }
                 return response;
             }
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
         return 500; // If nothing bad happens, then print the OK code
+    }
+
+    void sendParticle(Player p, ParticleMaker.Particle effect, float offX, float offY, float offZ) {
+        ParticleMaker maker = new ParticleMaker(effect, 0.0, 1, offX, offY, offZ);
+        maker.sendToPlayer(p);
+    }
+
+    void sendParticle(Player p, Material mat, float offX, float offY, float offZ) {
+        ParticleMaker maker = new ParticleMaker(ParticleMaker.Particle.ITEM_CRACK, 0.0, 40, offX, offY, offZ);
+        maker.setData(mat);
+        maker.sendToPlayer(p);
+    }
+
+    private void sendParticle(Location loc, Material mat, float offX, float offY, float offZ) {
+        ParticleMaker maker = new ParticleMaker(ParticleMaker.Particle.ITEM_CRACK, 0.0, 40, offX, offY, offZ);
+        maker.setData(mat);
+        maker.sendToLocation(loc);
+    }
+
+    void timedDelay(final Player player, final Material mat, int time) {
+        final Item item = player.getWorld().dropItem(player.getLocation(), new ItemStack(mat, 1));
+        item.setPickupDelay(Integer.MAX_VALUE);
+        item.setCustomNameVisible(true);
+        item.setCustomName("§bSPLEEEFED!!!");
+        item.setMetadata("takeable", new FixedMetadataValue(Core.get(), "takeable"));
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                item.remove();
+                sendParticle(item.getLocation(), mat, 0.3F, 0.3F, 0.3F);
+            }
+        }.runTaskLater(Core.get(), time);
+    }
+
+    int randInt(int min, int max) {
+        Random rand = new Random();
+        return rand.nextInt(max - min + 1) + min;
     }
 }

@@ -9,16 +9,16 @@ import org.bukkit.entity.Player;
 public class CommandPurr extends CommandCore {
 
     @Command(name = "purr")
-    public void run (Player p) {
+    public void run(Player p) {
         if (Core.get().isBlockCommands()) {
             p.sendMessage(prefix + "Sorry, Chat Commands are disabled until further notice.");
             return;
         }
 
-        if (!Cooldown.hasCooldown (p)) {
-            Cooldown.giveCooldown (p);
+        if (!Cooldown.hasCooldown(p)) {
+            Cooldown.giveCooldown(p);
             Bukkit.getOnlinePlayers()
-                    .forEach(player -> player.sendMessage(prefix + p.getName () + " is now purring *puurrrrrr*"));
+                    .forEach(player -> player.sendMessage(prefix + p.getName() + " is now purring *puurrrrrr*"));
         }
     }
 }
