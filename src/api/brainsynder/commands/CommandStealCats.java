@@ -5,6 +5,7 @@ import api.brainsynder.Utils.Cooldown;
 import api.brainsynder.commands.api.Command;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Ocelot;
@@ -59,6 +60,7 @@ public class CommandStealCats extends CommandCore {
         }
         if (!Cooldown.hasCooldown(p)) {
             Bukkit.getOnlinePlayers().forEach(Player -> Player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eCatsCraft &6>> " + p.getName() + " &7tried to steal all the cats but their pockets exploded!")));
+			p.playSound(p.getLocation(), Sound.CAT_HISS, 2, 2);
             spawnCats(p);
             Cooldown.giveCooldown(p);
         }

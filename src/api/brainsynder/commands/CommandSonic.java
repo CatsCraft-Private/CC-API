@@ -20,7 +20,7 @@ public class CommandSonic extends CommandCore {
         }
         if(!Cooldown.hasCooldown(p)) {
         	Bukkit.getOnlinePlayers().forEach(Player -> Player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eCatsCraft &6>> " + p.getName() + " &7turned into Sonic &eGotta go fast!")));
-        	p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10, 50));
+        	p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100, 50));
         	Cooldown.giveCooldown(p);
         }
 	}

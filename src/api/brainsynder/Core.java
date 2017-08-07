@@ -12,6 +12,7 @@ package api.brainsynder;
 
 import EasterEgg.hunt.MainEggHunt;
 import api.brainsynder.Listeners.ChatListener;
+import api.brainsynder.Listeners.CreatureSpawnListener;
 import api.brainsynder.Listeners.EntityDamageListener;
 import api.brainsynder.Utils.Configuration;
 import api.brainsynder.Utils.FloatingItem;
@@ -59,6 +60,7 @@ public class Core extends JavaPlugin {
         }
         getServer().getPluginManager().registerEvents(new ChatListener(), this);
         getServer().getPluginManager().registerEvents(new EntityDamageListener(), this);
+        getServer().getPluginManager().registerEvents(new CreatureSpawnListener(), this);
 
         DateFormat dateFormat = new SimpleDateFormat("MM");
         Date date = new Date();

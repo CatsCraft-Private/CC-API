@@ -35,7 +35,7 @@ public class CommandBounce extends CommandCore {
         }
         if(!Cooldown.hasCooldown(p)) {
         	Bukkit.getOnlinePlayers().forEach(Player -> Player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eCatsCraft &6>> " + p.getName() + " &7used their cat ability super jump!")));
-        	p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 10, 20));
+        	p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 100, 20));
         	Core.get().getNoFall().add(p.getUniqueId());
         	removeNoFall(p.getUniqueId());
         	Cooldown.giveCooldown(p);
