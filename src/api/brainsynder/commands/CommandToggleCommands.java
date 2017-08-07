@@ -10,7 +10,7 @@ public class CommandToggleCommands extends CommandCore {
     public void run(Player p) {
         if (allowed.contains(p.getUniqueId().toString())) {
             Core.get().setBlockCommands(!Core.get().isBlockCommands());
-            p.sendMessage(prefix + "Toggled Chat Commands to: §e" + Core.get().isBlockCommands());
+            p.sendMessage(prefix + "Toggled Chat Commands Activated: §e" + !Core.get().isBlockCommands());
         }
     }
 }

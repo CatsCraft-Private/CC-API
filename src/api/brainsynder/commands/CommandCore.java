@@ -65,6 +65,7 @@ public abstract class CommandCore implements CommandListener {
         CommandManager.register(new CommandDisco());
         CommandManager.register(new CommandTop20());
         CommandManager.register(new CommandQuote());
+        CommandManager.register(new CommandArmorSee());
     }
 
     public static void destoryEntity(Player player, Entity entity) {
