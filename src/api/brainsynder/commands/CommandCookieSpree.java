@@ -54,12 +54,7 @@ public class CommandCookieSpree extends CommandCore {
         	Cooldown.giveCooldown(p);
             ItemMaker itemStack = new ItemMaker(MaterialWrapper.COOKIE);
             itemStack.setName(ChatColor.translateAlternateColorCodes('&', "&6Chocolate Chip Cookie"));
-            itemStack.addLoreLine(ChatColor.translateAlternateColorCodes('&', "&eFrom&7: &3" + p.getName()));
-        	for(Player online : Bukkit.getOnlinePlayers()) {
-        		if(online.getInventory().firstEmpty() == -1) continue;
-        		online.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eCatsCraft &6>> " + p.getName() + " &7tried to open the cookie jar but it exploded &6Freeee Cookiessss &d:D"));
-        		online.getInventory().addItem(itemStack.create());
-        	}
+            Bukkit.getOnlinePlayers().forEach(player -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eCatsCraft &6>> " + p.getName() + " &7tried to open the cookie jar but it exploded &6Freeee Cookiessss &d:D")));
         }
 	}
 }
