@@ -1,18 +1,19 @@
 package api.brainsynder.commands;
 
-import api.brainsynder.Core;
-import api.brainsynder.Utils.Cooldown;
-import api.brainsynder.commands.api.Command;
+import java.util.Random;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+
+import api.brainsynder.Core;
+import api.brainsynder.Utils.Cooldown;
+import api.brainsynder.commands.api.Command;
 import simple.brainsynder.api.ItemMaker;
 import simple.brainsynder.wrappers.MaterialWrapper;
-
-import java.util.Random;
 
 public class CommandCookieSpree extends CommandCore {
 	
@@ -48,14 +49,16 @@ public class CommandCookieSpree extends CommandCore {
             p.sendMessage(prefix + "Sorry, Chat Commands are disabled until further notice.");
             return;
         }
-        if(!Cooldown.hasCooldown(p, 15)) {
+        if(!Cooldown.hasCooldown(p)) {
         	spawnCookies(p);
         	Cooldown.giveCooldown(p);
             ItemMaker itemStack = new ItemMaker(MaterialWrapper.COOKIE);
             itemStack.setName(ChatColor.translateAlternateColorCodes('&', "&6Chocolate Chip Cookie"));
-            p.getInventory().addItem(itemStack.create());
-            for(Player online : Bukkit.getOnlinePlayers()) {
+            itemStack.addLoreLine(ChatColor.translateAlternateColorCodes('&', "&eFrom&7: &3" + p.getName()));
+        	for(Player online : Bukkit.getOnlinePlayers()) {
+        		if(online.getInventory().firstEmpty() == -1) continue;
         		online.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eCatsCraft &6>> " + p.getName() + " &7tried to open the cookie jar but it exploded &6Freeee Cookiessss &d:D"));
+        		online.getInventory().addItem(itemStack.create());
         	}
         }
 	}
