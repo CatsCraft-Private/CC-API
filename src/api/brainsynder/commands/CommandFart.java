@@ -46,8 +46,6 @@ public class CommandFart extends CommandCore {
                             Player player = (Player) ent;
                             if (!player.getUniqueId().toString().equals(p.getUniqueId().toString())) {
                                 player.sendMessage("§eCatsCraft §6§l>> §7*SNIFF SNIFF* Who farted?");
-                                hasEffect.add(player);
-                                effect.apply(player);
                             }
                         }
                     }

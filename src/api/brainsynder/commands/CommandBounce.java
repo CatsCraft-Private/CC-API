@@ -1,7 +1,8 @@
 package api.brainsynder.commands;
 
-import java.util.UUID;
-
+import api.brainsynder.Core;
+import api.brainsynder.Utils.Cooldown;
+import api.brainsynder.commands.api.Command;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -9,9 +10,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import api.brainsynder.Core;
-import api.brainsynder.Utils.Cooldown;
-import api.brainsynder.commands.api.Command;
+import java.util.UUID;
 
 public class CommandBounce extends CommandCore {
 	
@@ -33,7 +32,7 @@ public class CommandBounce extends CommandCore {
             p.sendMessage(prefix + "Sorry, Chat Commands are disabled until further notice.");
             return;
         }
-        if(!Cooldown.hasCooldown(p)) {
+        if(!Cooldown.hasCooldown(p, 15)) {
         	Bukkit.getOnlinePlayers().forEach(Player -> Player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eCatsCraft &6>> " + p.getName() + " &7used their cat ability super jump!")));
         	p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 100, 20));
         	Core.get().getNoFall().add(p.getUniqueId());
