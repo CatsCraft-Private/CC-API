@@ -37,6 +37,7 @@ public abstract class CommandCore implements CommandListener {
     ExpireHashMap<String, Object> cache = new ExpireHashMap<>();
 
     public static void registerCommands() {
+    	CommandManager.register(new CommandPokeSpree());
     	CommandManager.register(new CommandCookieSpree());
         CommandManager.register(new CommandToggleCommands());
         CommandManager.register(new CommandBounce());
