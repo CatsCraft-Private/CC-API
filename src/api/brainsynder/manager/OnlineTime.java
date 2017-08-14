@@ -171,6 +171,19 @@ public class OnlineTime implements Listener {
                             playerLeave(uuid);
                             continue;
                         }
+                        if (afkPlayer.isInCart()) {
+                            if (Bukkit.getPlayer(uuid).isInsideVehicle()) {
+                                playerLeave(uuid);
+                                continue;
+                            } else {
+                                afkPlayer.setInCart(false);
+                            }
+                        }
+
+
+                        if (Bukkit.getPlayer(uuid).isInsideVehicle() && (!afkPlayer.isInCart())) {
+                            afkPlayer.setInCart(true);
+                        }
                     }
                     addPlayTime(uuid);
                 }

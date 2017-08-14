@@ -9,11 +9,20 @@ public class AFKPlayer {
     public static HashMap<UUID, AFKPlayer> all = new HashMap();
     private UUID uuid;
     private boolean afk = false;
+    private boolean inCart = false;
     private Location lastLocation;
 
     private AFKPlayer(UUID uuid) {
         all.put(uuid, this);
         this.uuid = uuid;
+    }
+
+    public void setInCart(boolean inCart) {
+        this.inCart = inCart;
+    }
+
+    public boolean isInCart() {
+        return inCart;
     }
 
     public static boolean isAFK(UUID uuid) {
