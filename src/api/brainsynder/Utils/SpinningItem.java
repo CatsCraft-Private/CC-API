@@ -39,7 +39,7 @@ public class SpinningItem {
         armorStand = (ArmorStand) location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
         armorStand.setGravity(false);
         armorStand.setVisible(false);
-        armorStand.setSmall(big ? false : true);
+        armorStand.setSmall(!big);
         armorStand.setMetadata("NO_TOUCH", new FixedMetadataValue(Core.get(), "NO_TOUCH"));
         this.item = itemStack;
 

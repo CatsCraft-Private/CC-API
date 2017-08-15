@@ -22,7 +22,6 @@ import api.brainsynder.holidays.halloween.Halloween;
 import api.brainsynder.manager.OnlineTime;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.text.DateFormat;
@@ -100,24 +99,22 @@ public class Core extends JavaPlugin {
         }
     }
 
-    public void registerListener(Listener listenerClass) {
-        Bukkit.getPluginManager().registerEvents(listenerClass, this);
-    }
-
     public void onDisable() {
         holidayEvent.unLoad();
         FloatingItem.deleteAll();
-        DateFormat dateFormat = new SimpleDateFormat("MM");
-        Date date = new Date();
-        if (!Bukkit.getOnlinePlayers().isEmpty()) {
-            for (Player p : Bukkit.getOnlinePlayers()) {
-                OnlineTime.playerLeave(p.getUniqueId());
-                if (dateFormat.format(date).equals("04")) {
-                    MainEggHunt.savePlayer(p);
+        try { // Tired of seeing an error when it reloads xD
+            DateFormat dateFormat = new SimpleDateFormat("MM");
+            Date date = new Date();
+            if (!Bukkit.getOnlinePlayers().isEmpty()) {
+                for (Player p : Bukkit.getOnlinePlayers()) {
+                    OnlineTime.playerLeave(p.getUniqueId());
+                    if (dateFormat.format(date).equals("04")) {
+                        MainEggHunt.savePlayer(p);
+                    }
                 }
+                OnlineTime.DatabaseUpload.forceUpdate();
             }
-            OnlineTime.DatabaseUpload.forceUpdate();
-        }
+        }catch (Exception ignored) {}
         noFall.clear();
     }
 

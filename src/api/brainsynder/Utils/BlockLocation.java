@@ -60,10 +60,15 @@ public class BlockLocation {
             return null;
         }
     }
-    public static BlockLocation fromFile (File file) {
-        if (!file.exists()) return null;
+    public static BlockLocation fromFile (File folder, String fileName) {
+        if (!folder.exists()) {
+            folder.mkdirs();
+            return null;
+        }
 
         try {
+            File file = new File(folder, fileName + ".nbt");
+            if (!file.exists()) return null;
             FileInputStream stream = new FileInputStream(file);
             return new BlockLocation(CompressedStreamTools.readCompressed(stream));
         }catch (Exception e){
@@ -125,9 +130,10 @@ public class BlockLocation {
     public String toDataString() {
         return "BlockLocation:[world=" + world.getName() + ",x=" + x + ",y=" + y + ",z=" + z + ']';
     }
-    public void save (File file) {
+    public void save (File folder, String fileName) {
         try {
-            if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
+            if (!folder.exists()) folder.mkdirs();
+            File file = new File(folder, fileName + ".nbt");
             if (!file.exists()) file.createNewFile();
             CompressedStreamTools.writeCompressed(compound, new FileOutputStream(file));
             System.out.println(compound.toString());

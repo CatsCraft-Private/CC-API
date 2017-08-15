@@ -14,7 +14,10 @@ public abstract class HolidayEvents implements CommandListener {
     private SimpleDateFormat format;
     private String month;
     public final Core instance;
+    // The Directory where all Locations are stored...
     protected File locDir;
+    // the Directory where all Entities are stored...
+    protected File entLoc;
     /**
      * How Creative Spawn is setup...
      *
@@ -28,10 +31,18 @@ public abstract class HolidayEvents implements CommandListener {
         this.month = month;
         instance = Core.get();
         locDir = new File(instance.getDataFolder().toString() + File.separator + "BlockLocations" + File.separator);
+        entLoc = new File(instance.getDataFolder().toString() + File.separator + "Entities" + File.separator);
         try {
-            center = BlockLocation.fromFile(new File(locDir, "SpawnLocation.nbt"));
+            center = BlockLocation.fromFile(locDir, "SpawnLocation");
         }catch (Exception ignored){}
         format = new SimpleDateFormat("MM");
+    }
+
+    public boolean fileExists (File folder, String fileName) {
+        if (!folder.exists()) folder.mkdirs();
+        File file = new File(folder, fileName + ".nbt");
+        if (!file.exists()) return false;
+        return true;
     }
 
     public boolean isMonth () {
@@ -44,7 +55,7 @@ public abstract class HolidayEvents implements CommandListener {
     }
 
     public void unLoad () {
-        if (center != null) center.save(new File(locDir, "SpawnLocation.nbt"));
+        if (center != null) center.save(locDir, "SpawnLocation");
     }
 
     public void setCenter(BlockLocation center) {

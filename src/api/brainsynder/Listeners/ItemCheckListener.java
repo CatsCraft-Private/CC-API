@@ -26,9 +26,7 @@ public class ItemCheckListener implements Listener {
         Player p = e.getPlayer();
         ItemStack clicked = p.getItemInHand();
 
-        //if (p.isOp()) return;
         if (clicked == null || clicked.getType() == Material.AIR) return;
-
         ItemStack newItem = handle.downgradeItem(clicked);
         if (!newItem.isSimilar(clicked)) {
             p.setItemInHand(newItem);
@@ -41,7 +39,6 @@ public class ItemCheckListener implements Listener {
         ItemStack clicked = e.getCurrentItem();
         Player p = (Player) e.getWhoClicked();
 
-        if (p.isOp()) return;
         if (clicked == null || clicked.getType() == Material.AIR) return;
         ItemStack newItem = handle.downgradeItem(clicked);
         if (!newItem.isSimilar(clicked)) {
