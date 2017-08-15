@@ -8,4 +8,8 @@ public class Halloween extends HolidayEvents {
     }
 
 
+    @Override
+    public void load() {
+
+    }
 }
