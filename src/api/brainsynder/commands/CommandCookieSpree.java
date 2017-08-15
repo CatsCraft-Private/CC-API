@@ -1,19 +1,18 @@
 package api.brainsynder.commands;
 
-import java.util.Random;
-
+import api.brainsynder.Core;
+import api.brainsynder.Utils.Cooldown;
+import api.brainsynder.commands.api.Command;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
-
-import api.brainsynder.Core;
-import api.brainsynder.Utils.Cooldown;
-import api.brainsynder.commands.api.Command;
 import simple.brainsynder.api.ItemMaker;
 import simple.brainsynder.wrappers.MaterialWrapper;
+
+import java.util.Random;
 
 public class CommandCookieSpree extends CommandCore {
 	

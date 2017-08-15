@@ -17,6 +17,8 @@ import api.brainsynder.Listeners.EntityDamageListener;
 import api.brainsynder.Utils.Configuration;
 import api.brainsynder.Utils.FloatingItem;
 import api.brainsynder.commands.CommandCore;
+import api.brainsynder.holidays.HolidayEvents;
+import api.brainsynder.holidays.halloween.Halloween;
 import api.brainsynder.manager.OnlineTime;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -25,11 +27,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class Core extends JavaPlugin {
     private static Core instance;
@@ -39,6 +37,7 @@ public class Core extends JavaPlugin {
     private boolean blockDabAttack = false;
     private boolean blockCommands = false;
     private List<UUID> noFall = new ArrayList<>();
+    private HolidayEvents holidayEvent;
 
     public List<UUID> getNoFall() {
 		return noFall;
@@ -50,6 +49,8 @@ public class Core extends JavaPlugin {
 
     public void onEnable() {
         instance = this;
+        holidayEvent = new Halloween();
+        holidayEvent.load();
         CommandCore.registerCommands();
         configuration = new Configuration(this);
         if (!configuration.isSet("AFKCheck-Interval")) {
@@ -104,6 +105,7 @@ public class Core extends JavaPlugin {
     }
 
     public void onDisable() {
+        holidayEvent.unLoad();
         FloatingItem.deleteAll();
         DateFormat dateFormat = new SimpleDateFormat("MM");
         Date date = new Date();
