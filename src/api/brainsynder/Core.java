@@ -17,8 +17,6 @@ import api.brainsynder.Listeners.EntityDamageListener;
 import api.brainsynder.Utils.Configuration;
 import api.brainsynder.Utils.FloatingItem;
 import api.brainsynder.commands.CommandCore;
-import api.brainsynder.holidays.HolidayEvents;
-import api.brainsynder.holidays.halloween.Halloween;
 import api.brainsynder.manager.OnlineTime;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -36,7 +34,7 @@ public class Core extends JavaPlugin {
     private boolean blockDabAttack = false;
     private boolean blockCommands = false;
     private List<UUID> noFall = new ArrayList<>();
-    private HolidayEvents holidayEvent;
+    //private HolidayEvents holidayEvent;
 
     public List<UUID> getNoFall() {
 		return noFall;
@@ -48,8 +46,8 @@ public class Core extends JavaPlugin {
 
     public void onEnable() {
         instance = this;
-        holidayEvent = new Halloween();
-        holidayEvent.load();
+        //holidayEvent = new Halloween();
+        //holidayEvent.load();
         CommandCore.registerCommands();
         configuration = new Configuration(this);
         if (!configuration.isSet("AFKCheck-Interval")) {
@@ -100,7 +98,7 @@ public class Core extends JavaPlugin {
     }
 
     public void onDisable() {
-        holidayEvent.unLoad();
+        //holidayEvent.unLoad();
         FloatingItem.deleteAll();
         try { // Tired of seeing an error when it reloads xD
             DateFormat dateFormat = new SimpleDateFormat("MM");

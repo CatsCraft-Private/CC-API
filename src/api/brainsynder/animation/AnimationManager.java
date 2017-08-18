@@ -131,7 +131,8 @@ public class AnimationManager {
                     .setRightHand(new EulerWrapper(-0.4, 0, 0))
     );
 
-    private static double val = 0.01;
+    private static double val = 0.05;
+    private static double val2 = 0.02;
     public static final MovementFrames floating = new MovementFrames(
             (new AnimationFrame().addY(val)),
             (new AnimationFrame().addY(val)),
@@ -143,7 +144,17 @@ public class AnimationManager {
             (new AnimationFrame().addY(val)),
             (new AnimationFrame().addY(val)),
             (new AnimationFrame().addY(val)),
+            (new AnimationFrame().addY(val)),
+            (new AnimationFrame().addY(val)),
+            (new AnimationFrame().addY(val)),
+            (new AnimationFrame().addY(val2)),
+            (new AnimationFrame().addY(val2)),
 
+            (new AnimationFrame().addY(-val2)),
+            (new AnimationFrame().addY(-val2)),
+            (new AnimationFrame().addY(-val)),
+            (new AnimationFrame().addY(-val)),
+            (new AnimationFrame().addY(-val)),
             (new AnimationFrame().addY(-val)),
             (new AnimationFrame().addY(-val)),
             (new AnimationFrame().addY(-val)),
