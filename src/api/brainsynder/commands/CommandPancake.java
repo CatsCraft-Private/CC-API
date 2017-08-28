@@ -6,6 +6,7 @@ import api.brainsynder.commands.api.Command;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import simple.brainsynder.sound.SoundMaker;
 
 public class CommandPancake extends CommandCore {
 
@@ -18,6 +19,7 @@ public class CommandPancake extends CommandCore {
 		if (!Cooldown.hasCooldown(p)) {
 			Bukkit.getOnlinePlayers().forEach(Player -> Player.sendMessage(ChatColor.translateAlternateColorCodes('&',"&eCatsCraft &6>> " + p.getName() + " &eis eating pancakes &dYummmmm!")));
 			Cooldown.giveCooldown(p);
+			SoundMaker.ENTITY_GENERIC_EAT.playSound(p.getLocation());
 		}
 	}
 

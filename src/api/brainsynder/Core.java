@@ -35,7 +35,6 @@ public class Core extends JavaPlugin {
     private boolean blockDabAttack = false;
     private boolean blockCommands = false;
     private List<UUID> noFall = new ArrayList<>();
-    //private HolidayEvents holidayEvent;
 
     public List<UUID> getNoFall() {
 		return noFall;
@@ -47,8 +46,6 @@ public class Core extends JavaPlugin {
 
     public void onEnable() {
         instance = this;
-        //holidayEvent = new Halloween();
-        //holidayEvent.load();
         CommandCore.registerCommands();
         configuration = new Configuration(this);
         if (!configuration.isSet("AFKCheck-Interval")) {
@@ -100,7 +97,6 @@ public class Core extends JavaPlugin {
     }
 
     public void onDisable() {
-        //holidayEvent.unLoad();
         FloatingItem.deleteAll();
         try { // Tired of seeing an error when it reloads xD
             DateFormat dateFormat = new SimpleDateFormat("MM");

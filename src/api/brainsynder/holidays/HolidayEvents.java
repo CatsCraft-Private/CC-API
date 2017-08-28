@@ -4,13 +4,15 @@ import api.brainsynder.Core;
 import api.brainsynder.Utils.BlockLocation;
 import api.brainsynder.commands.api.CommandListener;
 import api.brainsynder.commands.api.CommandManager;
+import org.bukkit.Bukkit;
+import org.bukkit.event.Listener;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @SuppressWarnings("ALL")
-public abstract class HolidayEvents implements CommandListener {
+public abstract class HolidayEvents implements CommandListener, Listener {
     private SimpleDateFormat format;
     private String month;
     public final Core instance;
@@ -52,6 +54,7 @@ public abstract class HolidayEvents implements CommandListener {
 
     public void load () {
         CommandManager.register(this);
+        Bukkit.getPluginManager().registerEvents(this, Core.get());
     }
 
     public void unLoad () {
