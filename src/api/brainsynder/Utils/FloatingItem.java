@@ -57,6 +57,7 @@ public class FloatingItem {
     }
 
     public void spawn(ItemStack itemStack, boolean big, String[] text) {
+        Core.get().spawnMe = true;
         armorStand = (ArmorStand) location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
         armorStand.setGravity(false);
         armorStand.setCustomNameVisible(true);

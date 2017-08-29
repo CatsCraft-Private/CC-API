@@ -130,6 +130,31 @@ public class AnimationManager {
                     .setLeftHand(new EulerWrapper(0.4, 0, 0))
                     .setRightHand(new EulerWrapper(-0.4, 0, 0))
     );
+    public static final MovementFrames dab = new MovementFrames(
+            (new AnimationFrame())
+                    .setLeftHand(new EulerWrapper(0, 0, 0))
+                    .setRightHand(new EulerWrapper(0, 0, 0))
+                    .setHead(new EulerWrapper(0, 0, 0)),
+            (new AnimationFrame())
+                    .setLeftHand(new EulerWrapper(0, 0, -43))
+                    .setRightHand(new EulerWrapper(-31, 0, 0))
+                    .setHead(new EulerWrapper(44, -316, 0)),
+            (new AnimationFrame())
+                    .setLeftHand(new EulerWrapper(0, 0, -23))
+                    .setRightHand(new EulerWrapper(-11, 0, 0))
+                    .setHead(new EulerWrapper(44, -316, 0)),
+            (new AnimationFrame())
+                    .setLeftHand(new EulerWrapper(0, 0, -143))
+                    .setRightHand(new EulerWrapper(-131, 0, 143))
+                    .setHead(new EulerWrapper(44, -316, 0)),
+            (new AnimationFrame())
+                    .setLeftHand(new EulerWrapper(0, 0, 243))
+                    .setRightHand(new EulerWrapper(331, 0, 243))
+                    .setHead(new EulerWrapper(44, -316, 0)),
+            (new AnimationFrame())
+                    .setLeftHand(new EulerWrapper(0, 0, 0))
+                    .setRightHand(new EulerWrapper(0, 0, 0))
+    );
 
     private static double val = 0.05;
     private static double val2 = 0.02;

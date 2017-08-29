@@ -36,6 +36,7 @@ public class SpinningItem {
     }
 
     public void spawn(ItemStack itemStack, boolean big, List<String> text) {
+        Core.get().spawnMe = true;
         armorStand = (ArmorStand) location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
         armorStand.setGravity(false);
         armorStand.setVisible(false);

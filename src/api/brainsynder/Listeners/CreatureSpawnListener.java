@@ -22,6 +22,7 @@ public class CreatureSpawnListener implements Listener {
         Entity e = event.getEntity();
         if(Core.get().spawnMe && event.isCancelled()) {
             event.setCancelled(false);
+            Core.get().spawnMe = false;
         }
     }
 
@@ -38,6 +39,7 @@ public class CreatureSpawnListener implements Listener {
         Entity e = event.getEntity();
         if(Core.get().spawnMe && event.isCancelled()) {
             event.setCancelled(false);
+            Core.get().spawnMe = false;
         }
     }
 }

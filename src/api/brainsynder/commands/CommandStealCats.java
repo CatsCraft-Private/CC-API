@@ -44,6 +44,7 @@ public class CommandStealCats extends CommandCore {
             double x = -0.5F + (float) (Math.random() * 0.9D);
             double y = 0.5D;
             double z = -0.5F + (float) (Math.random() * 0.9D);
+            Core.get().spawnMe = true;
             Ocelot ocelot = (Ocelot) p.getWorld().spawnEntity(p.getLocation(), EntityType.OCELOT);
             ocelot.setCustomName(ChatColor.translateAlternateColorCodes('&', "&6Stolen Cat"));
             ocelot.setVelocity(new Vector(x, y, z));
