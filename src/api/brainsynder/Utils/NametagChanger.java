@@ -30,7 +30,7 @@ public class NametagChanger {
 
         switch (action) {
             case CREATE:
-                team.addPlayer(player);
+                team.addEntry(player.getName());
                 break;
             case UPDATE:
                 team.unregister();
@@ -39,7 +39,7 @@ public class NametagChanger {
                 team.setPrefix(Color(prefix));
                 team.setSuffix(Color(suffix));
                 team.setNameTagVisibility(NameTagVisibility.ALWAYS);
-                team.addPlayer(player);
+                team.addEntry(player.getName());
                 break;
             case DESTROY:
                 team.unregister();
