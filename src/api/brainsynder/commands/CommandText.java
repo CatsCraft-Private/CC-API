@@ -27,7 +27,7 @@ public class CommandText extends CommandCore {
 
     @Command(name = "text")
     public void text(Player player, String[] args) {
-        if (allowed.contains(player.getUniqueId().toString())) {
+        if (!allowed.contains(player.getUniqueId().toString())) {
             player.sendMessage("§cYou do not have permission to this command.");
             return;
         }
