@@ -120,17 +120,20 @@ public class ChatListener implements Listener {
         for (Player players : Bukkit.getServer().getOnlinePlayers()) {
             String playerName = players.getName();
             if (e.getMessage().contains(playerName)) {
-                ChatColor color = ChatColor.RESET;
-                try {
-                    String[] args = e.getMessage().split(playerName);
-                    if (!args[0].equalsIgnoreCase(playerName)) {
-                        color = ChatColor.valueOf(ChatColor.getLastColors(args[0]));
-                    }
-                }catch (Throwable ignored) {}
-                msg = msg.replaceAll(playerName, ChatColor.DARK_AQUA + "@" + playerName + color);
+                String color = ChatColor.RESET.toString();
+                String dupe = e.getMessage();
+                String[] args = replaceLast(dupe, playerName, "♪").split("♪");
+                if (args.length != 0) {
+                    color = ChatColor.getLastColors(args[0]);
+                }
+                msg = msg.replaceAll(playerName, ChatColor.DARK_AQUA + "@" + playerName + ChatColor.RESET + color);
             }
         }
         e.setMessage(msg);
+    }
+
+    private String replaceLast(String text, String regex, String replacement) {
+        return text.replaceFirst("(?s)(.*)" + regex, "$1" + replacement);
     }
 
     @EventHandler
