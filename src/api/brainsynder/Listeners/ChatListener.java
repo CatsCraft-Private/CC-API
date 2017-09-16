@@ -120,7 +120,12 @@ public class ChatListener implements Listener {
         for (Player players : Bukkit.getServer().getOnlinePlayers()) {
             String playerName = players.getName();
             if (e.getMessage().contains(playerName)) {
-                msg = msg.replaceAll(playerName, ChatColor.DARK_AQUA + "@" + playerName + ChatColor.RESET);
+                String color = ChatColor.RESET.toString();
+                try {
+                    String[] args = e.getMessage().split(playerName);
+                    color = ChatColor.getLastColors(args[0]);
+                }catch (Throwable ignored) {}
+                msg = msg.replaceAll(playerName, ChatColor.DARK_AQUA + "@" + playerName + color);
             }
         }
         e.setMessage(msg);
