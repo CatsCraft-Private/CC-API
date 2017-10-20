@@ -86,4 +86,25 @@ public class ItemCheckListener implements Listener {
             e.getPlayer().updateInventory();
         }
     }
+    
+    	public void checkItem(Player player) {
+		int slot = 0;
+		while(slot <= 8) {
+			ItemStack loaded = player.getInventory().getItem(slot);
+			if(loaded == null || loaded.getType() == Material.AIR) continue;
+			ItemStack item = handle.downgradeItem(loaded);
+			if(!item.isSimilar(loaded)) {
+				player.getInventory().setItem(slot, item);
+			}
+			slot++;
+		}
+	}
+    
+    @EventHandler
+    public void onSavedToolBarLoad(InventoryCreativeEvent e) {
+    	Player p = (Player) e.getWhoClicked();
+    	if(e.getSlotType() == SlotType.QUICKBAR) {
+    		checkItem(p);
+    	}
+    }
 }
